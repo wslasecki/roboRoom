@@ -18,7 +18,7 @@
 
 <body>
 
-Control away, boss.
+Control away!
 
 </body>
 </html>

@@ -28,11 +28,12 @@ $(document).ready( function() {
     cmd = Controls.getCommandName(e.which);
     console.log(e.which + " ==> " + cmd);
 
+    rId = gup("robotId") ? gup("robotId") : 0;
     // Send the input to the command DB
     $.ajax({
       url: "sendInput.php",
       type: "POST",
-      data: {robotId: 1, command: cmd},
+      data: {robotId: rId, command: cmd},
       dataType: "text",
       success: function(d) {
         console.log("Successfully sent!")
