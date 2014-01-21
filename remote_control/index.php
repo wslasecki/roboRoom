@@ -18,7 +18,7 @@
 
 <body>
 
-Control away!
+Control away! (To control the robot, press W/A/S/D while on this page. Check in dev console for feedback if you don't have a robot connected to see the effect!)
 
 </body>
 </html>
