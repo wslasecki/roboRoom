@@ -5,6 +5,7 @@ f = "forward";
 r = "right";
 b = "back";
 h = "hard";
+t = "fast";
 s = "stop";
 
 
@@ -15,11 +16,13 @@ fwd: false,
 right: false,
 back: false,
 hard: false,
+fast: false,
 
 getCommandStr: function() {
 
   retStr = "";
 
+  // Add each of the active direction (chording)
   if( Controls.left ) {
     retStr += l + " ";
   }
@@ -32,15 +35,23 @@ getCommandStr: function() {
   if( Controls.back ) {
     retStr += b + " ";
   }
-  if( Controls.hard ) {
-    retStr += h + " ";
-  }
 
 
+  // If nothing is active, return to stopped
   if( retStr.length == 0 ) {
     retStr = s;
   }
+  else {
+    // Only add speed/turn modifiers when there is a non-stop action
+    if( Controls.hard ) {
+      retStr += h + " ";
+    }
+    if( Controls.fast ) {
+      retStr += t + " ";
+    }
+  }
 
+  // 
   return retStr.trim();
 },
 
@@ -62,48 +73,39 @@ keyIsActive: function(inKey) {
   case 83:
   case 40:
     return Controls.back;
-  case 16:
+  case 17:
     return Controls.hard;
+  case 16:
+    return Controls.fast;
   default:
     return false;
   }
 },
 
-activateKey: function(inKey) {
-  if( !Controls.left && (inKey == 97 || inKey == 65 || inKey == 37) ) {
-    Controls.left = true;
+activateDeactivateKey: function(inKey) {
+  // If a, A, left-arrow
+  if( (inKey == 97 || inKey == 65 || inKey == 37) ) {
+    Controls.left = !Controls.left;
   }
-  if( !Controls.fwd && (inKey == 119 || inKey == 87 || inKey == 38) ) {
-    Controls.fwd = true;
+  // If w, W, up-arrow
+  if( (inKey == 119 || inKey == 87 || inKey == 38) ) {
+    Controls.fwd = !Controls.fwd;
   }
-  if( !Controls.right && (inKey == 100 || inKey == 68 || inKey == 39) ) {
-    Controls.right = true;
+  // If d, D, right-arrow
+  if( (inKey == 100 || inKey == 68 || inKey == 39) ) {
+    Controls.right = !Controls.right;
   }
-  if( !Controls.back && (inKey == 115 || inKey == 83 || inKey == 40) ) {
-    Controls.back = true;
+  // If s, S, down-arrow
+  if( (inKey == 115 || inKey == 83 || inKey == 40) ) {
+    Controls.back = !Controls.back;
   }
-  if( !Controls.hard && inKey == 16 ) {
-    Controls.hard = true;
+  // If CTRL
+  if( inKey == 17 ) {
+    Controls.hard = !Controls.hard;
   }
-
-  return;
-},
-
-deactivateKey: function(inKey) {
-  if( Controls.left && (inKey == 97 || inKey == 65 || inKey == 37) ) {
-    Controls.left = false;
-  }
-  if( Controls.fwd && (inKey == 119 || inKey == 87 || inKey == 38) ) {
-    Controls.fwd = false;
-  }
-  if( Controls.right && (inKey == 100 || inKey == 68 || inKey == 39) ) {
-    Controls.right = false;
-  }
-  if( Controls.back && (inKey == 115 || inKey == 83 || inKey == 40) ) {
-    Controls.back = false;
-  }
-  if( Controls.hard && inKey == 16 ) {
-    Controls.hard = false;
+  // If SHIFT
+  if( inKey == 16 ) {
+    Controls.fast = !Controls.fast;
   }
 
   return;
@@ -117,7 +119,7 @@ $(document).ready( function() {
 
   $('body').keydown( function(e) {
     if( !Controls.keyIsActive(e.which) ) {
-      Controls.activateKey(e.which);
+      Controls.activateDeactivateKey(e.which);
       cmd = Controls.getCommandStr();
 
       // Send the input to the command DB
@@ -136,7 +138,7 @@ $(document).ready( function() {
 
   $('body').keyup( function(e) {
     if( Controls.keyIsActive(e.which) ) {
-      Controls.deactivateKey(e.which);
+      Controls.activateDeactivateKey(e.which);
       cmd = Controls.getCommandStr(e.which);
 
       // Send the input to the command DB
