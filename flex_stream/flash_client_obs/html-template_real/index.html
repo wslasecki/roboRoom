@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+    <head>
+        <title>roboTurk</title>       
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css" media="screen"> 
+			    html, body	{ height:100%; }
+    			body { margin:3em;; padding:1em; overflow:auto; text-align:left; 
+    			       background-color: #ffffff; }   
+    			object:focus { outline:none; }
+    			#flashContent { display:none; }
+    			
+    			#left {
+    			  float: left;
+  			  }
+  			  
+  			  #right {
+  			    float: left;
+  			    padding-left: 2em;
+			    }
+        </style>
+		    
+        <script type="text/javascript" src="swfobject.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script type="text/javascript" src="turkit-lib.js"></script>
+        <script type="text/javascript" src="roboTurk.js"></script>
+        <script type="text/javascript"> 
+            var swfVersionStr = "10.1.0";
+            var xiSwfUrlStr = "playerProductInstall.swf";
+            var flashvars = {};
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "#ffffff";
+            params.allowscriptaccess = "sameDomain";
+            params.allowfullscreen = "true";
+            var attributes = {};
+            attributes.id = "KeyStream";
+            attributes.name = "KeyStream";
+            attributes.align = "middle";
+            swfobject.embedSWF(
+                "KeyStream.swf", "flashContent", 
+                "640", "480", 
+                swfVersionStr, xiSwfUrlStr, 
+                flashvars, params, attributes);
+			swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+        </script>
+    </head>
+    <body>
+      <h1>{ Complete the task }</h1>
+      <div id="left">
+        <div id="flashContent">
+        	<p>This HIT requires Flash Player 10.1 or newer.</p>
+        </div>
+      </div>
+      <div id="right">
+        <div id="info">
+          <h3>Bonus</h3>
+          <span id="payment">$0.00</span>
+        </div>
+
+        <div id="controls">
+          <h3>Controls</h3>
+          <ul>
+            <li>W: Forward</li>
+            <li>A: Left (strafe)</li>
+            <li>S: Right: (strafe)</li>
+            <li>D: Backward</li>
+            <li>Q: Turn left</li>
+            <li>E: Turn right</li>
+          </ul>
+          <br />
+          <img src="keys.png" alt="keyboard diagram of Q, W, E, A, S, D keys" />
+        </div>
+        
+        <form id="form" name="form">
+          <input type="hidden" id="assignmentId" name="assignmentId" value="hci"></input>
+          <input type="hidden" id="workerId" name="workerId" value="hci"></input>
+          <input type="hidden" id="hitId" name="hitId" value="hci"></input>
+          <input type="submit" value="Done controlling. Submit HIT."></input>
+        </form>
+      </div>
+        
+      
+	   	
+       	<noscript>
+          <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="640" height="480" id="KeyStream">
+              <param name="movie" value="KeyStream.swf" />
+              <param name="quality" value="high" />
+              <param name="bgcolor" value="#ffffff" />
+              <param name="allowScriptAccess" value="sameDomain" />
+              <param name="allowFullScreen" value="true" />
+              <!--[if !IE]>-->
+              <object type="application/x-shockwave-flash" data="KeyStream.swf" width="640" height="480">
+                  <param name="quality" value="high" />
+                  <param name="bgcolor" value="#ffffff" />
+                  <param name="allowScriptAccess" value="sameDomain" />
+                  <param name="allowFullScreen" value="true" />
+              <!--<![endif]-->
+              <!--[if gte IE 6]>-->
+              	<p> 
+              		Either scripts and active content are not permitted to run or Adobe Flash Player version
+              		10.1.0 or greater is not installed.
+              	</p>
+              <!--<![endif]-->
+                  <a href="http://www.adobe.com/go/getflashplayer">
+                      <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" />
+                  </a>
+              <!--[if !IE]>-->
+              </object>
+              <!--<![endif]-->
+          </object>
+    </noscript>		
+  </body>
+</html>
